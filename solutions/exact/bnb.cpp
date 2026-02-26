@@ -7,7 +7,7 @@
 using namespace std;
 
 int n, current_time = 0, best_time = INT_MAX, min_time = INT_MAX;
-vector<int> e(1001), l(1001), d(1001), s(1001), best_s(1001), current_times(1001), best_times(1001);
+vector<int> e(1001), l(1001), d(1001), s(1001), best_s(1001), times(1001), best_times(1001);
 vector<vector<int>> t(1001, vector<int>(1001));
 vector<bool> visited(1001, false);
 
@@ -21,8 +21,8 @@ int main(void)
     // Version of the input data (1 - 6)
     int version = 1;
 
-    // Set to true to add additional texts explaining the output, false otherwise
-    bool print = false;
+    // Set to true to add additional text explaining the output, false otherwise
+    bool print = true;
 
     set<int> sizes = {5, 10, 100, 200, 300, 500, 600, 700, 900, 1000};
 
@@ -62,7 +62,7 @@ int main(void)
             }
         }
     }
-    s[0] = current_times[0] = 0;
+    s[0] = times[0] = 0;
     generate_routes(1);
 
     if (print)
@@ -100,7 +100,7 @@ void generate_routes(int k)
     {
         if (!visited[i])
         {
-            int arrival = max(current_times[k - 1] + t[s[k - 1]][i], e[i]);
+            int arrival = max(times[k - 1] + t[s[k - 1]][i], e[i]);
 
             if (arrival > l[i])
             {
@@ -109,7 +109,7 @@ void generate_routes(int k)
             s[k] = i;
             visited[i] = true;
             current_time += t[s[k - 1]][i];
-            current_times[k] = arrival + d[i];
+            times[k] = arrival + d[i];
 
             if (k < n)
             {
@@ -125,7 +125,7 @@ void generate_routes(int k)
                 for (int j = 1; j <= n; j++)
                 {
                     best_s[j] = s[j];
-                    best_times[j] = current_times[j];
+                    best_times[j] = times[j];
                 }
             }
             visited[i] = false;
