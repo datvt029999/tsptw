@@ -14,16 +14,24 @@ void generate_routes(int k);
 
 int main(void)
 {
-    int size = 5, version = 1;
+    // Size of the problem (N)
+    int size = 5;
+
+    // Version of the input data (1 to 6)
+    int version = 1;
+
+    // Set to true to add addition texts explaning the output, false otherwise
+    bool print = false;
+
     set<int> sizes = {5, 10, 100, 200, 300, 500, 600, 700, 900, 1000};
 
     if (sizes.find(size) == sizes.end())
     {
-        cout << "Invalid problem size. Please choose from the following: ";
+        cout << "Invalid problem size. Please choose from the following:";
 
         for (int customers : sizes)
         {
-            cout << customers << " ";
+            cout << " " << customers;
         }
         cout << endl;
         return 1;
@@ -33,20 +41,24 @@ int main(void)
         cout << "Invalid input version. Please choose a version from 1 to 6." << endl;
         return 1;
     }
-    bool print = true;
     freopen(("../../input/" + to_string(size) + "/" + to_string(version) + ".txt").c_str(), "r", stdin);
     cin >> n;
 
     for (int i = 1; i <= n; i++)
+    {
         cin >> e[i] >> l[i] >> d[i];
+    }
 
     for (int i = 0; i <= n; i++)
     {
         for (int j = 0; j <= n; j++)
         {
             cin >> t[i][j];
+
             if (i != j)
+            {
                 min_time = min(min_time, t[i][j]);
+            }
         }
     }
     s[0] = current_times[0] = 0;
@@ -119,4 +131,5 @@ void generate_routes(int k)
             current_time -= t[s[k - 1]][i];
         }
     }
+    return;
 }
