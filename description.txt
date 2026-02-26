@@ -1,12 +1,18 @@
-Một nhân viên giao hàng lấy hàng ở kho (điểm 0) và cần đi giao hàng cho N khách hàng 1,2,…, N. Khách hàng i nằm ở điểm i và có yêu cầu giao hàng trong khoảng thời gian từ e(i) đến l(i) và giao hàng hết d(i)  đơn vị thời gian (s). Biết rằng  t(i,j) là thời gian di  chuyển từ điểm i đến điểm j. Nhân viên giao hàng xuất phát từ kho tại thời điểm t0, hãy tính toán lộ trình giao hàng cho nhân viên giao hàng sao cho tổng thời gian di chuyển là ngắn nhất.
+Một nhân viên giao hàng lấy hàng ở kho (điểm 0) và cần đi giao hàng cho N khách hàng 1,2,…, N.
+Khách hàng i nằm ở điểm i và có yêu cầu giao hàng trong khoảng thời gian từ e(i) đến l(i) và giao hàng hết d(i)  đơn vị thời gian (s).
+Biết rằng  t(i,j) là thời gian di  chuyển từ điểm i đến điểm j.
+Nhân viên giao hàng xuất phát từ kho tại thời điểm t0, hãy tính toán lộ trình giao hàng cho nhân viên giao hàng sao cho tổng thời gian di chuyển là ngắn nhất.
 Each solution is represented by a permutation s[1], s[2], . . ., s[N] of 1, 2, . . ., N.
+
 Input
 Line 1: contains a positive integer N (1 <= N <= 1000)
 Line i + 1 (i = 1, . . ., N): contains e(i), l(i) and d(i)
 Line i + N + 2 (i = 0, 1, . . ., N): contains the ith row of the matrix t.
+
 Output
 Line 1: contains N
 Line 2: contains s[1], s[2], . . ., s[N]
+
 Example
 Input
 5
