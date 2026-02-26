@@ -1,6 +1,7 @@
 #include <climits>
 #include <iostream>
 #include <set>
+#include <string>
 #include <vector>
 
 using namespace std;
@@ -17,10 +18,10 @@ int main(void)
     // Size of the problem (N)
     int size = 5;
 
-    // Version of the input data (1 to 6)
+    // Version of the input data (1 - 6)
     int version = 1;
 
-    // Set to true to add addition texts explaning the output, false otherwise
+    // Set to true to add additional texts explaining the output, false otherwise
     bool print = false;
 
     set<int> sizes = {5, 10, 100, 200, 300, 500, 600, 700, 900, 1000};
