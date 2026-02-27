@@ -22,10 +22,7 @@ with open(f"../../input/{size}/{version}.txt", "r") as f:
 
     for i in range(1, n + 1):
         e[i], l[i], d[i] = map(int, f.readline().split())
-    t = []
-
-    for i in range(n + 1):
-        t.append(list(map(int, f.readline().split())))
+    t = [list(map(int, f.readline().split())) for _ in range(n + 1)]
 visited = [False] * (n + 1)
 previous_point = 0
 total_time = 0
@@ -41,7 +38,6 @@ if printed:
     print("    Solution                 :", end=" ")
 
 for i in range(1, n + 1):
-    best_point = -1
     best_deadline = float("inf")
     best_distance = float("inf")
 
@@ -67,11 +63,11 @@ for i in range(1, n + 1):
     previous_point = best_point
 
 if printed:
-    print()
     print(
-        f"    Time                     : {total_time}\n    Time finishing delivering:",
+        f"\n    Time                     : {total_time}\n    Time finishing delivering:",
         end="",
     )
+
     for i in range(1, n + 1):
-        print(f" {previous_times[i]}", end="")
+        print("", previous_times[i], end="")
 print()
