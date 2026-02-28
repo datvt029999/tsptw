@@ -1,20 +1,9 @@
-# Size of the problem (N)
-size = 5
-
-# Version of the input data (1 - 6)
-version = 1
+from sys import argv
 
 # Set to true to add additional text explaining the output, false otherwise
 printed = True
 
-if size not in [5, 10, 100, 200, 300, 500, 600, 700, 900, 1000]:
-    raise ValueError(
-        "Invalid problem size. Please choose from the following: 5, 10, 100, 200, 300, 500, 600, 700, 900, 1000"
-    )
-elif version < 1 or version > 6:
-    raise ValueError("Invalid input version. Please choose a version from 1 to 6.")
-
-with open(f"../../input/{size}/{version}.txt", "r") as f:
+with open(f"../../input/{int(argv[1])}.txt", "r") as f:
     n = int(f.readline().strip())
     e = [0] * (n + 1)
     l = [0] * (n + 1)
@@ -27,15 +16,10 @@ visited = [False] * (n + 1)
 previous_point = 0
 total_time = 0
 previous_times = [0] * (n + 1)
+print(f"Problem size             : {n}" if printed else n)
 
 if printed:
-    print(
-        f"Size   : {size}\nVersion: {version}\n    Number of customers      : ", end=""
-    )
-print(n)
-
-if printed:
-    print("    Solution                 :", end=" ")
+    print("Solution                 :", end=" ")
 
 for i in range(1, n + 1):
     best_deadline = float("inf")
@@ -64,10 +48,6 @@ for i in range(1, n + 1):
 
 if printed:
     print(
-        f"\n    Time                     : {total_time}\n    Time finishing delivering:",
-        end="",
+        f"\nTotal time               : {total_time + t[previous_point][0]}\nTime finishing delivering:",
+        *previous_times[1:],
     )
-
-    for i in range(1, n + 1):
-        print("", previous_times[i], end="")
-print()
