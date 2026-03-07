@@ -1,17 +1,21 @@
-from sys import argv
+# Set to true to read input from a file, false otherwise
+read_from_file = True
 
 # Set to true to add additional text explaining the output, false otherwise
 printed = True
 
-with open(f"../../input/{int(argv[1])}.txt", "r") as f:
-    n = int(f.readline().strip())
-    e = [0] * (n + 1)
-    l = [0] * (n + 1)
-    d = [0] * (n + 1)
+if read_from_file:
+    import sys
 
-    for i in range(1, n + 1):
-        e[i], l[i], d[i] = map(int, f.readline().split())
-    t = [list(map(int, f.readline().split())) for _ in range(n + 1)]
+    sys.stdin = open(f"../../input/{int(sys.argv[1])}.txt", "r")
+n = int(input().strip())
+e = [0] * (n + 1)
+l = [0] * (n + 1)
+d = [0] * (n + 1)
+
+for i in range(1, n + 1):
+    e[i], l[i], d[i] = map(int, input().split())
+t = [list(map(int, input().split())) for _ in range(n + 1)]
 visited = [False] * (n + 1)
 previous_point = 0
 total_time = 0

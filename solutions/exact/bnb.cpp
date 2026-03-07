@@ -17,8 +17,8 @@ int main(int argc, char *argv[])
     // Set to true to add additional text explaining the output, false otherwise
     bool print = true;
 
-    // Comment out the following line to read from the input file instead of standard input
-    freopen(("../../input/" + to_string(stoi(argv[1])) + ".txt").c_str(), "r", stdin);
+    // Comment out the following line to read from the standard input instead of the input file
+    freopen(("../../input/" + to_string(atoi(argv[1])) + ".txt").c_str(), "r", stdin);
 
     cin >> n;
 
