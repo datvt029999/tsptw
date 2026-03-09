@@ -14,6 +14,10 @@ void generate_routes(int k);
 
 int main(int argc, char *argv[])
 {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+
     // Set to true to add additional text explaining the output, false otherwise
     bool print = true;
 

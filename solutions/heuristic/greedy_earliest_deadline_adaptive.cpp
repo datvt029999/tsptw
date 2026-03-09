@@ -4,13 +4,17 @@
 
 using namespace std;
 
-int main(int argc, int argv[])
+int main(int argc, char *argv[])
 {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+
     // Set to true to add additional text explaining the output, false otherwise
     bool print = true;
 
     // Comment out the following line to read from the standard input instead of the input file
-    freopen(("../../input/" + to_string(argv[1]) + ".txt").c_str(), "r", stdin);
+    freopen(("../../input/" + to_string(atoi(argv[1])) + ".txt").c_str(), "r", stdin);
 
     int n, previous_point = 0, total_time = 0;
     cin >> n;
