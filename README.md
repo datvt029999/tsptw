@@ -11,7 +11,7 @@ The first line contains an integer $N$.
 
 Line $i + 1$ ($i = 1, 2, ..., N$) contains three integers $e(i)$, $l(i)$ and $d(i)$, separated by a space character.
 
-Line $i + N + 2$ ($i = 0, 1, ..., N$) contains the $i^{th}$ row of the matrix $t$, in which the elements are separated by a space character.
+Line $i + N + 2$ ($i = 0, 1, ..., N$) contains the $i^{th}$ row of the matrix $t$, in which the elements are all integers and separated by a space character.
 
 ### Output
 The first line contains $N$.
