@@ -7,29 +7,33 @@ printed = True
 if read_from_file:
     import sys
 
-    sys.stdin = open(f"../../input/{int(sys.argv[1])}.txt", "r")
+    sys.stdin = open(f"../../input/{int(sys.argv[1])}.txt")
 n = int(input().strip())
-e = [0] * (n + 1)
-l = [0] * (n + 1)
-d = [0] * (n + 1)
+nodes = n + 1
+e = [0] * nodes
+l = [0] * nodes
+d = [0] * nodes
 
-for i in range(1, n + 1):
+for i in range(1, nodes):
     e[i], l[i], d[i] = map(int, input().split())
-t = [list(map(int, input().split())) for _ in range(n + 1)]
-visited = [False] * (n + 1)
+t = [list(map(int, input().split())) for _ in range(nodes)]
+
+if read_from_file:
+    sys.stdin.close()
+visited = [False] * nodes
 previous_point = 0
 total_time = 0
-previous_times = [0] * (n + 1)
+previous_times = [0] * nodes
 print(f"Problem size             : {n}" if printed else n)
 
 if printed:
     print("Solution                 :", end=" ")
 
-for i in range(1, n + 1):
+for i in range(1, nodes):
     best_deadline = float("inf")
     best_distance = float("inf")
 
-    for j in range(1, n + 1):
+    for j in range(1, nodes):
         if (
             not visited[j]
             and previous_times[i - 1] + t[previous_point][j] <= l[j]
