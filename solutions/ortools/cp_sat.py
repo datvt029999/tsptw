@@ -50,15 +50,14 @@ waiting_times = [
     model.NewIntVar(0, l[i] - e[i], f"waiting_times_{i}") for i in range(nodes)
 ]
 
-# Time window constraints if the salesman moves from city i to city j
+# Time window constraints if the salesman moves from city i to city j (x[i, j] = 1)
 for i in range(nodes):
     for j in range(1, nodes):
         if i != j:
-            # x[i, j] = 1 -> visiting_times[j] >= visiting_times[i] + travelling_times[i, j]
+            # visiting_times[j] >= visiting_times[i] + travelling_times[i, j]
             model.Add(
-                (x[i, j] - 1) * 1000000000 + visiting_times[i] + travelling_times[i, j]
-                <= visiting_times[j]
-            )
+                visiting_times[j] >= visiting_times[i] + travelling_times[i, j]
+            ).OnlyEnforceIf(x[i, j])
 
             # The waiting time at city j is equal to the time to visit city j minus the time to visit city i minus the time to travel from city i to city j
             model.Add(
