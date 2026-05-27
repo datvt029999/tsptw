@@ -9,7 +9,7 @@ printed = True
 if read_from_file:
     import sys
 
-    sys.stdin = open(f"../../input/{int(sys.argv[1])}.txt", "r")
+    sys.stdin = open(f"../../input/{int(sys.argv[1])}.txt")
 n = int(input().strip())
 nodes = n + 1
 e = [0] * nodes
