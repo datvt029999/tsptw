@@ -6,7 +6,7 @@
 using namespace std;
 
 int n, current_time = 0, best_time = INT_MAX, min_time = INT_MAX;
-vector<int> e(1001), l(1001), d(1001), s(1001), best_s(1001), times(1001), best_times(1001);
+vector<int> e(1001), l(1001), d(1001), s(1001), best_s(1001), arrivals(1001), best_arrivals(1001);
 vector<vector<int>> t(1001, vector<int>(1001));
 vector<bool> visited(1001, false);
 
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     bool print = true;
 
     // Comment out the following line to read from the standard input instead of the input file
-    freopen(("../../input/" + to_string(atoi(argv[1])) + ".txt").c_str(), "r", stdin);
+    freopen(("../../input/" + string(argv[1]) + ".txt").c_str(), "r", stdin);
 
     cin >> n;
 
@@ -43,18 +43,18 @@ int main(int argc, char *argv[])
             }
         }
     }
-    s[0] = times[0] = 0;
+    s[0] = arrivals[0] = 0;
     generate_routes(1);
 
     if (print)
     {
-        cout << "Problem size             : ";
+        cout << "Problem size   : ";
     }
     cout << n << endl;
 
     if (print)
     {
-        cout << "Best solution            : ";
+        cout << "Best solution  : ";
     }
 
     for (int i = 1; i <= n; i++)
@@ -64,11 +64,11 @@ int main(int argc, char *argv[])
 
     if (print)
     {
-        cout << "\nBest total time          : " << best_time << "\nTime finishing delivering: ";
+        cout << "\nBest total time: " << best_time << "\nArrivals       :";
 
         for (int i = 1; i <= n; i++)
         {
-            cout << best_times[i] << " ";
+            cout << " " << best_arrivals[i];
         }
     }
     cout << endl;
@@ -77,20 +77,19 @@ int main(int argc, char *argv[])
 
 void generate_routes(int k)
 {
-    for (int i = 1; i <= n; i++)
+    for (int i = 1, time_finishing_delivering = arrivals[k - 1] + d[s[k - 1]]; i <= n; i++)
     {
         if (!visited[i])
         {
-            int arrival = max(times[k - 1] + t[s[k - 1]][i], e[i]);
+            arrivals[k] = max(time_finishing_delivering + t[s[k - 1]][i], e[i]);
 
-            if (arrival > l[i])
+            if (arrivals[k] > l[i])
             {
                 continue;
             }
             s[k] = i;
             visited[i] = true;
             current_time += t[s[k - 1]][i];
-            times[k] = arrival + d[i];
 
             if (k == n)
             {
@@ -103,11 +102,11 @@ void generate_routes(int k)
                     for (int j = 1; j <= n; j++)
                     {
                         best_s[j] = s[j];
-                        best_times[j] = times[j];
+                        best_arrivals[j] = arrivals[j];
                     }
                 }
             }
-            else if (current_time + (n - k) * min_time < best_time)
+            else if (current_time + (n - k + 1) * min_time < best_time)
             {
                 generate_routes(k + 1);
             }

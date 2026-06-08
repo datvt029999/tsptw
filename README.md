@@ -42,8 +42,8 @@ The second line contains $s[1]$, $s[2]$, ..., $s[N]$, separated by a space chara
 
 ### Constraints:
 - $1 \leq N \leq 1000$
-- $e(i), d(i) \geq 0$, $i = 1, 2,..., N$
-- $e(i) + d(i) \leq l(i) \leq 1000000$, $i = 1, 2,..., N$
+- $0 \leq e(i) \leq l(i)$, $i = 1, 2,..., N$
+- $d(i) \geq 0$, $i = 1, 2,..., N$
 - $t$ is a square matrix of size $n + 1$ with $t(i, j) > 0$ and $t(i, i) = 0$, $i, j = 0, 1, ..., N$, $i \neq j$
 
 See [here](description.txt) for a Vietnamese version.

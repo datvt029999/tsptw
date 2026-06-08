@@ -1,1 +1,5 @@
 *.exe
+__pycache__/
+.vscode/
+gurobi.lic
+output/

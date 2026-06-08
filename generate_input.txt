@@ -1,0 +1,103 @@
+# This file's extension is intentionally .txt instead of .py to avoid mistakenly overwriting old input data
+
+import random
+import sys
+
+
+def normal_input(points):
+    t = [[0] * points for _ in range(points)]
+
+    for i in range(points):
+        for j in range(points):
+            if i != j:
+                t[i][j] = random.randrange(10, 100)
+    s = list(range(1, points))
+    random.shuffle(s)
+    d = {i: random.randrange(5, 30) for i in range(1, points)}
+    arrivals = {s[0]: t[0][s[0]] + random.randrange(100)}
+    total_time = t[0][s[0]] + d[s[0]]
+
+    for i, customer in enumerate(s[1:]):
+        arrivals[customer] = (
+            total_time
+            + t[s[i]][customer]
+            + random.randrange(100 if points <= 500 else 200)
+        )
+        total_time = arrivals[customer] + d[customer]
+    max_arrival = max(arrivals.values())
+    return {
+        "e": {i: random.randrange(arrivals[i]) for i in range(1, points)},
+        "l": {
+            i: random.randrange(arrivals[i], max_arrival + random.randrange(1, points))
+            for i in range(1, points)
+        },
+        "d": d,
+        "t": t,
+    }
+
+
+def clustered_input(points, limits):
+    interval = points // 3
+    a = random.sample(range(1, points), random.randrange(interval, points - interval))
+    b = list(set(range(1, points)) - set(a))
+    t = [[0] * points for _ in range(points)]
+
+    for i in range(points):
+        for j in range(i + 1, points):
+            if (i in a and j in a) or (i in b and j in b):
+                t[i][j] = random.randrange(limits[0][0], limits[0][1])
+                t[j][i] = random.randrange(limits[0][0], limits[0][1])
+            else:
+                t[i][j] = random.randrange(limits[1][0], limits[1][1])
+                t[j][i] = random.randrange(limits[1][0], limits[1][1])
+    random.shuffle(a)
+    random.shuffle(b)
+    s = a + b
+    d = {i: random.randrange(5, 30) for i in range(1, points)}
+    arrivals = {s[0]: t[0][s[0]] + random.randrange(100)}
+    total_time = t[0][s[0]] + d[s[0]]
+
+    for i, customer in enumerate(s[1:]):
+        arrivals[customer] = (
+            total_time
+            + t[s[i]][customer]
+            + random.randrange(100 if points <= 500 else 200)
+        )
+        total_time = arrivals[customer] + d[customer]
+    max_arrival = max(arrivals.values())
+    return {
+        "e": {i: random.randrange(arrivals[i]) for i in range(1, points)},
+        "l": {
+            i: random.randrange(arrivals[i], max_arrival + random.randrange(1, points))
+            for i in range(1, points)
+        },
+        "d": d,
+        "t": t,
+    }
+
+
+def main():
+    for n in [5, 10, 20, 50, 100, 200, 300, 500, 750, 1000]:
+        for type, bound in {
+            "normal": None,
+            "clustered": [[10, 50], [100, 200]],
+        }.items():
+            nodes = n + 1
+            input = (
+                normal_input(nodes)
+                if type.startswith("normal")
+                else clustered_input(nodes, bound)
+            )
+            sys.stdout = open(f"input/{type}_{n}.txt", "w")
+            print(n)
+
+            for i in range(1, nodes):
+                print(input["e"][i], input["l"][i], input["d"][i])
+
+            for i in range(nodes):
+                print(*input["t"][i])
+            sys.stdout.close()
+
+
+if __name__ == "__main__":
+    main()
